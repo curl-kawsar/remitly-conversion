@@ -2,9 +2,7 @@ import Converter from "@/components/Converter";
 import type { RateResponse, RateSource } from "@/lib/types";
 import { headers } from "next/headers";
 
-const REVALIDATE_SECONDS = 300;
-
-export const revalidate = REVALIDATE_SECONDS;
+export const revalidate = 300;
 
 type InitialRate = {
   rate: number | null;
@@ -20,7 +18,7 @@ async function getInitialRate(): Promise<InitialRate> {
 
   try {
     const response = await fetch(`${baseUrl}/api/rate`, {
-      next: { revalidate: REVALIDATE_SECONDS },
+      next: { revalidate },
     });
     const data = (await response.json()) as unknown;
 
